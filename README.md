@@ -1,12 +1,9 @@
 # Shopping List with React.js.
 
-Basic shopping list implemented with React.js (`v15`) and Twitter Bootstrap (`v3`).
+Basic shopping list implemented with React.js (`v15`) and Twitter Bootstrap (`v3`). 
 
 Uses Webpack, [Yarn](https://code.facebook.com/posts/1840075619545360).
 
-### Live
-
-http://fedosejev.github.io/shopping-list-react/
 
 ## Install
 
