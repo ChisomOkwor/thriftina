@@ -1,3 +1,4 @@
+// Remove all not used 
 var React = require('react');
 
 var ListHeader = React.createClass({
