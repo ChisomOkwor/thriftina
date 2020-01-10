@@ -1,3 +1,5 @@
+// Item description is not used in the current version of the app.
+// This was left for posterity.
 var React = require('react');
 
 var ListItemDescription = function (props) {
