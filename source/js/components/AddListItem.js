@@ -10,6 +10,7 @@ var AddListItem = React.createClass({
 
   handleSubmitEvent: function (event) {
     event.preventDefault();
+   
  
     var item = {
       //id: uuid.v4(),
@@ -20,6 +21,7 @@ var AddListItem = React.createClass({
       // description: this.refs.description.value.trim(),
       // quantity: this.refs.quantity.value
     };
+     listItemNameInput.value = '';
 
     this.props.addListItem(item);
   },
@@ -30,7 +32,7 @@ var AddListItem = React.createClass({
         <h3 className="page-header">Add New Item</h3>
         <div className="form-group">
           <label htmlFor="listItemName">Name <span style={styleRequired}>*</span></label>
-          <input type="text" className="form-control" id="listItemName" placeholder="Enter item name" required ref="name" />
+          <input type="text" className="form-control" id="listItemNameInput" placeholder="Enter item name" required ref="name" />
         </div>
         <hr />
         <button type="submit"  className="btn btn-link">Add to list</button>
