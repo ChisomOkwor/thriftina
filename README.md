@@ -1,13 +1,13 @@
-# Shopping List with React.js.
+# Shopping List with React.js and Flask backend
 
-Basic shopping list implemented with React.js (`v15`) and Twitter Bootstrap (`v3`). 
+Basic shopping list implemented with React.js (`v15`) and Twitter Bootstrap (`v3`). Works with backend found [here](https://github.com/DanielaEncarnacion97/SES-PlaceHolder-Project). Created for Capital One Software Engineering Summit, January 2020.
 
 Uses Webpack, [Yarn](https://code.facebook.com/posts/1840075619545360).
 
 
 ## Install
 
-1. `npm install -g yarn`
+1. `npm install -g yarn` (use `sudo` if this gives you problems) 
 2. `yarn install`
 
 #### What is Yarn?
@@ -16,29 +16,17 @@ Uses Webpack, [Yarn](https://code.facebook.com/posts/1840075619545360).
 
 ## Run
 
-1. `npm start`
+1. `npm start` (May need to run `npm install` first)
 2. Open `http://localhost:8080` in a web browser.
 
 ## Build
 
 `npm run build`
 
-## Other versions
 
-+ [React.js and ES2015](https://github.com/fedosejev/shopping-list-react-es2015)
-+ [React.js and Flux (ES5)](https://github.com/fedosejev/shopping-list-react-flux)
-+ [React.js, Redux and ES2015](https://github.com/fedosejev/shopping-list-react-redux)
-
-## Author
+## Inspired by
 
 Artemij Fedosejev
 + [Website](http://artemij.com)
-+ [LinkedIn](https://www.linkedin.com/in/artemij)
-+ [React.Tips](http://react.tips)
 
-## License
-
-This software is released under the MIT license.
-
-This software comes with NO WARRANTY, expressed or implied.
 
