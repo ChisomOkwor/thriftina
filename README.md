@@ -1,4 +1,6 @@
-# Shopping List with React.js and Flask backend
+# OneStop Shopping List with React.js and Flask backend
+
+Demo slides: https://docs.google.com/presentation/d/1U31Rbi18J_3ZPGU3VriVuUi6Qj_0gHzB8MCnRj1Zm-w/edit?usp=sharing
 
 Basic shopping list implemented with React.js (`v15`) and Twitter Bootstrap (`v3`). Works with backend found [here](https://github.com/DanielaEncarnacion97/SES-PlaceHolder-Project). Created for Capital One Software Engineering Summit, January 2020.
 
