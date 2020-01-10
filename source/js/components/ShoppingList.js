@@ -3,6 +3,13 @@ var List = require('./List');
 var AddListItem = require('./AddListItem');
 
 var ShoppingList = React.createClass({
+
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//         isLoading: false
+//     };
+// }
   
   getInitialState: function () {
     return {
@@ -37,6 +44,7 @@ var ShoppingList = React.createClass({
   },
 
   handleClickEvent: function (event) {
+    // var queries = Array.from(this.state.list).join(',')
     var queries = ""
     for (const index in this.state.list){
       queries = queries + this.state.list[index].name + ","
@@ -49,9 +57,45 @@ var ShoppingList = React.createClass({
     //   console.log(`${thing["name"]}`);
     // }
     // console.log(this.state.list.join(','))
-    const constructedUrl = `http://???????${[]}`;
-    // return fetch(constructedUrl).then(res => res.json()); // do whatever with fetched data
+    const constructedUrl = "https://localhost:5000/api/" + queries;
+    var axiosInstance = axios.create({
+      baseURL: constructedUrl,
+      // headers: {'LocationCode': this.state.passwd.toLowerCase()}
+  });
+  let self = this;
+  this.setState({isLoading : true}, () => {
+      axiosInstance.get()
+      .then( response => {
+          if (response.status === 200) {
+              let responseJson = JSON.parse(response.data)
+              self.setState({
+                product: bread,
+                  
+              });
+          } else {
+              self.setState({
+                  didRequestFail: true,
+                  isLoading : false
+              })
+          }
+      }).catch(error => {
+          if (error.response && error.response.status === 403) { // Lambda/APIGW will return 403 for wrong code entered
+              self.setState({
+                  isCodeWrong: true,
+                  isLoading : false
+              });
+          } else {
+              if (error) {
+                  self.setState({
+                      didRequestFail: true,
+                      isLoading : false
+                  })
+              }
+          }
+  });
+  })
   },
+    // return fetch(constructedUrl).then(res => res.json()); // do whatever with fetched data
 
   render: function () {
     var items = this.state.list;

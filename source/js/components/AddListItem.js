@@ -10,7 +10,7 @@ var AddListItem = React.createClass({
 
   handleSubmitEvent: function (event) {
     event.preventDefault();
-
+ 
     var item = {
       //id: uuid.v4(),
       id: list_index++,
