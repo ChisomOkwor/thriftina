@@ -1,3 +1,4 @@
+// We ended up not using quantity 
 var React = require('react');
 var ListItem = require('./ListItem');
 var ListHeader = require('./ListHeader');
