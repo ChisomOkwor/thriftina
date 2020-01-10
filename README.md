@@ -24,9 +24,4 @@ Uses Webpack, [Yarn](https://code.facebook.com/posts/1840075619545360).
 `npm run build`
 
 
-## Inspired by
-
-Artemij Fedosejev
-+ [Website](http://artemij.com)
-
 
