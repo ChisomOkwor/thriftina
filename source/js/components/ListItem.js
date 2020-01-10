@@ -16,10 +16,10 @@ var ListItem = React.createClass({
     return (
       <div className="panel panel-primary">
         <div className="panel-heading">
-          {item.quantity} x {item.name}
+           {item.name}
         </div>
 
-        {item.description.length > 0 ? <ListItemDescription description={item.description} /> : ''}
+        {/* {item.description.length > 0 ? <ListItemDescription description={item.description} /> : ''} */}
 
         <div className="panel-footer">
           <form className="form-inline" onSubmit={this.handleSubmit}>
