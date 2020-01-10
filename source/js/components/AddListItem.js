@@ -30,7 +30,7 @@ var AddListItem = React.createClass({
         <h3 className="page-header">Add New Item</h3>
         <div className="form-group">
           <label htmlFor="listItemName">Name <span style={styleRequired}>*</span></label>
-          <input type="text" className="form-control" id="listItemName" placeholder="Enter name" required ref="name" />
+          <input type="text" className="form-control" id="listItemName" placeholder="Enter item name" required ref="name" />
         </div>
         <hr />
         <button type="submit"  className="btn btn-link">Add to list</button>

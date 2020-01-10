@@ -1,21 +1,49 @@
 var React = require('react');
 var List = require('./List');
 var AddListItem = require('./AddListItem');
+var axios = require('axios');
+var responseJson = ''
+var target_total = 0;
+var walmart_total = 0;
+var showResult = false;
 
 var ShoppingList = React.createClass({
+  // export default class ShoppingList extends Component {
 
 //   constructor(props) {
 //     super(props);
 //     this.state = {
-//         isLoading: false
+//         // isLoading: false,
+//         list: {},
+        // cost = '',
+        // isCheaper = '',
+        // name = '',
+        // supplier = ''
+
+
 //     };
 // }
   
   getInitialState: function () {
     return {
-      list: {}
+      list: [],
+      responseTest: '',
+      // cost: '',
+      // isCheaper: '',
+      // name = '',
+      // supplier = '',
+      doneButtonClicked: false,
+      showResult: false,
+    
+
     };
   },
+
+  // handlePinButtonClick = () => {
+  //   this.setState({
+  //       isAllowedToSeeContent: true
+  //   });
+  // },
 
   updateList: function (newList) {
     this.setState({
@@ -45,6 +73,7 @@ var ShoppingList = React.createClass({
 
   handleClickEvent: function (event) {
     // var queries = Array.from(this.state.list).join(',')
+
     var queries = ""
     for (const index in this.state.list){
       queries = queries + this.state.list[index].name + ","
@@ -57,21 +86,42 @@ var ShoppingList = React.createClass({
     //   console.log(`${thing["name"]}`);
     // }
     // console.log(this.state.list.join(','))
-    const constructedUrl = "https://localhost:5000/api/" + queries;
+    const constructedUrl = "http://localhost:5000/api/" + queries;
     var axiosInstance = axios.create({
       baseURL: constructedUrl,
-      // headers: {'LocationCode': this.state.passwd.toLowerCase()}
-  });
+      headers: {'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    }
+  }); 
   let self = this;
   this.setState({isLoading : true}, () => {
       axiosInstance.get()
-      .then( response => {
+      .then( response => { 
           if (response.status === 200) {
-              let responseJson = JSON.parse(response.data)
+              var i;
+              // var target_total = 0;
+              // var walmart_total = 0;
+              for (i = 0; response.data[i] != null; i++) {
+                if (response.data[i].supplier == 'target') {
+                  target_total += response.data[i].cost;
+                } else {
+                  walmart_total += response.data[i].cost;
+                }
+              }
+              walmart_total = walmart_total.toFixed(2);
+              target_total = target_total.toFixed(2);
+              console.log("walmart: " + walmart_total)
+              console.log("target: " + target_total)
+              //showResult = true;
+              // responseJson = JSON.parse(response.data)
               self.setState({
-                product: bread,
-                  
-              });
+                // list: response.data,
+                // responseTest: responseJson,
+                //doneButtonClicked: true
+                showResult: true
+              
+               });
           } else {
               self.setState({
                   didRequestFail: true,
@@ -97,28 +147,94 @@ var ShoppingList = React.createClass({
   },
     // return fetch(constructedUrl).then(res => res.json()); // do whatever with fetched data
 
-  render: function () {
-    var items = this.state.list;
+    render: function () {
+      var items = this.state.list;
+      console.log("items to come")
+      console.log("show: " + this.state.showResult)
+      const rowStyle = {
+        textAlign: "right",
+        background: "#CED7DB"
+      }
+      const styleObj = {
+        width: "130px",
+        height: "130px",
+        padding: "5px",
+        background: "#CED7DB"
+      }
+      const textStyle = {
+        padding: "10px",
+        color: "#5090AB",
+        background: "#CED7DB"
+      }
+      console.log(target_total < walmart_total)
 
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-6">
-
-          <List
-              items={items}
-              removeListItem={this.removeListItem}
-              removeAllListItems={this.removeAllListItems} />
-              <button type="button" onClick={this.handleClickEvent} className="btn btn-link">Done</button>
+      
+      console.log(showResult)
+      if (this.state.showResult) {
+        return (
+          <div className="container">
+            <div style={rowStyle} className="row">
+              <div className="col-sm-6">
+                <marquee><h4 style={textStyle}><i>Helps you save on all things shop.</i></h4></marquee>
+              </div>
+              <div className="col-sm-6">
+                <div class="pb-3" >
+                  <img style={styleObj} class="title-img" src="/logo.png" />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-6">
+                <List
+                  items={items}
+                  removeListItem={this.removeListItem}
+                  removeAllListItems={this.removeAllListItems} />
+                <button type="button" onClick={this.handleClickEvent} className="btn btn-link">Done</button>
+              </div>
+              <div className="col-sm-6">
+                <AddListItem addListItem={this.addListItem} />
+                <div>
+                   <h3>Your total for Walmart is calculated to be about ${walmart_total}</h3>
+                   <h3>Your total for Target is calculated to be about ${target_total}</h3>
+                   <p>Please note that this tool is still in development and so only provides
+                     estimates. Remember to shop wisely!
+                   </p>
+                </div>
+                
+              </div>
+              
+            </div>
           </div>
-          <div className="col-sm-6">
-            <AddListItem addListItem={this.addListItem} />
-          
+        );
+      }
+    // });
+      
+      return (
+        <div className="container">
+          <div style={rowStyle} className="row">
+            <div className="col-sm-6">
+              <marquee><h4 style={textStyle}><i>Helps you save on all things shop.</i></h4></marquee>
+            </div>
+            <div className="col-sm-6">
+              <div class="pb-3" >
+                <img style={styleObj} class="title-img" src="/logo.png" />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-6">
+              <List
+                items={items}
+                removeListItem={this.removeListItem}
+                removeAllListItems={this.removeAllListItems} />
+              <button type="button" onClick={this.handleClickEvent} className="btn btn-link">Done</button>
+            </div>
+            <div className="col-sm-6">
+              <AddListItem addListItem={this.addListItem} />
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
-});
-
+      );
+    }
+  });
 module.exports = ShoppingList;
